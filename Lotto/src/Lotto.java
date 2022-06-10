@@ -11,7 +11,7 @@ public class Lotto {
 	// 필요한 변수들
 	static Random random;
 	static ArrayList<Integer> draw, result;
-	static ArrayList<ArrayList<Integer>> choice;	
+	static ArrayList<ArrayList<Integer>> choice;
 	static Scanner sc = new Scanner(System.in);
 	static int tmp;
 	
@@ -24,6 +24,7 @@ public class Lotto {
 			tmp = sc.nextInt();
 		} catch (Exception e) {
 			System.out.println("잘못된 입력입니다.\n");
+			sc.nextLine();
 			return 0;
 		}
 		
@@ -36,8 +37,8 @@ public class Lotto {
 	
 	// 자동 추출
 	static void auto_lotto () {
-		// 5번 반복 (5게임)
-		for (int i = 0; i <= 4; i++) {
+		// 10번 반복 (10게임)
+		for (int i = 0; i <= 9; i++) {
 			System.out.print((i + 1) + "번 게임 번호 : ");
 			
 			for (int j = 0; j <= 5; j++) {
@@ -58,8 +59,8 @@ public class Lotto {
 	
 	// 수동 로또
 	static void manual_lotto () {
-		// 5번 반복 (5게임)
-		for (int i = 0; i <= 4; i++) {
+		// 10번 반복 (10게임)
+		for (int i = 0; i <= 9; i++) {
 			for (int j = 0; j <= 5; j++) {
 				System.out.print((i + 1) + "번 게임 " + (j + 1) + "번 : ");
 				try {
@@ -77,6 +78,7 @@ public class Lotto {
 					}
 				} catch (Exception e) {
 					System.out.println("잘못된 입력입니다.\n");
+					sc.nextLine();
 					j--;
 				}
 			}
@@ -159,7 +161,7 @@ public class Lotto {
 			result.add(score);
 		}
 		
-		for (int i = 0; i <= 4; i++) {
+		for (int i = 0; i <= choice.size() - 1; i++) {
 			System.out.print((i + 1) + "번 게임 결과 : ");
 			if (result.get(i) <= 2) {
 				System.out.println("꽝");
@@ -183,7 +185,7 @@ public class Lotto {
 	Lotto () {
 		// 루프 조건
 		int exit = 0;
-		while (!(exit == 3)) {
+		while (exit != 3) {
 			// 변수 초기화
 			draw = new ArrayList<Integer>();
 			choice = new ArrayList<ArrayList<Integer>>();
@@ -191,7 +193,7 @@ public class Lotto {
 			tmp = 0;
 			
 			// 2차원 리스트 초기화
-			for (int i = 0; i <= 4; i++) {
+			for (int i = 0; i <= 9; i++) {
 				choice.add(new ArrayList<Integer>());
 			}
 			
@@ -203,16 +205,18 @@ public class Lotto {
 			} else if (exit == 2) {
 				// 수동 로또
 				manual_lotto();
-			} else {
-				// 잘못된 입력값 or 종료
+			} else if (exit == 3){
+				// 종료
 				break;
 			}
 			
-			// 추첨
-			prize();
-			
-			// 결과
-			get_result();
+			if (exit == 1 || exit == 2) {
+				// 추첨
+				prize();
+				
+				// 결과
+				get_result();
+			}
 		}
 	}
 	
