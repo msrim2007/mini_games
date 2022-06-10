@@ -195,6 +195,7 @@ public class Lotto {
 				choice.add(new ArrayList<Integer>());
 			}
 			
+			// 메뉴 선택 분기
 			exit = menu();
 			if (exit == 1) {
 				// 자동 로또
