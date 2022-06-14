@@ -38,7 +38,7 @@ public class Lotto {
 	// 자동 추출
 	static void auto_lotto () {
 		// 10번 반복 (10게임)
-		for (int i = 0; i <= 9; i++) {
+		for (int i = 0; i <= 99; i++) {
 			System.out.print((i + 1) + "번 게임 번호 : ");
 			
 			for (int j = 0; j <= 5; j++) {
@@ -193,7 +193,7 @@ public class Lotto {
 			tmp = 0;
 			
 			// 2차원 리스트 초기화
-			for (int i = 0; i <= 9; i++) {
+			for (int i = 0; i <= 99; i++) {
 				choice.add(new ArrayList<Integer>());
 			}
 			
