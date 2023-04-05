@@ -15,13 +15,13 @@ const guessTheNumber = (function() {
             }
             randArr[i] = randNum;
         }
-
+        console.log(randArr.join(''));
         return randArr.join('');
     }
 
     function guessing(guessNum) {
         if (num === guessNum) {
-            alert(num + ' : CORRECT! - ' + count + ' tried');
+            alert(num + ' : CORRECT! - ' + (count + 1) + ' tried');
             document.getElementById('guessNumber').setAttribute('readonly', true);
             return true;
         } else {
@@ -82,52 +82,50 @@ const guessTheNumber = (function() {
     };
 }());
 
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('guessNumber').setAttribute('readonly', true);
+document.getElementById('guessNumber').setAttribute('readonly', true);
 
-    const startBtn = document.getElementById('start');
-    const guessBtn = document.getElementById('guess');
+const startBtn = document.getElementById('start');
+const guessBtn = document.getElementById('guess');
 
-    startBtn.addEventListener('click', function() {
-        let digits = 0;
-        try {
-            digits = Number(prompt("DIGITS OF NUMBER"));
-        } catch {
-            alert('PLZ TYPE 0 ~ 9 NUMBER');
+startBtn.addEventListener('click', function() {
+    let digits = 0;
+    try {
+        digits = new Number(prompt("DIGITS OF NUMBER"));
+    } catch {
+        alert('PLZ TYPE 0 ~ 9 NUMBER');
+        return;
+    }
+
+    if (!digits || digits < 1 || digits > 9) {
+        alert('PLZ TYPE 0 ~ 9 NUMBER');
+        return;
+    }
+    guessTheNumber.start(digits);
+});
+
+guessBtn.addEventListener('click', function() {
+    if (document.getElementById('guessNumber').hasAttribute('readonly') === true) {
+        console.log('hi?');
+        return;
+    }
+
+    let tmp = String(document.getElementById('guessNumber').value);
+    let tmpArr = [...tmp];
+    let arrLength = tmpArr.length;
+
+    if (!tmp || arrLength != guessTheNumber.getDigits()) {
+        alert('PLZ TYPE ONLY ' + guessTheNumber.getDigits() + '-digit NUNBER');
+        return;
+    }
+
+    let poped = '';
+    for (let i = 0; i < arrLength; i++) {
+        poped = tmpArr.pop();
+        if (tmpArr.includes(poped)) {
+            alert('REMOVE DUP NUMBER');
             return;
         }
+    }
 
-        if (!digits || digits < 1 || digits > 9) {
-            alert('PLZ TYPE 0 ~ 9 NUMBER');
-            return;
-        }
-        guessTheNumber.start(digits);
-    });
-
-    guessBtn.addEventListener('click', function() {
-        if (document.getElementById('guessNumber').hasAttribute('readonly') === true) {
-            console.log('hi?');
-            return;
-        }
-
-        let tmp = String(document.getElementById('guessNumber').value);
-        let tmpArr = [...tmp];
-        let arrLength = tmpArr.length;
-
-        if (!tmp || arrLength !== guessTheNumber.getDigits()) {
-            alert('PLZ TYPE ONLY ' + guessTheNumber.getDigits() + '-digit NUNBER');
-            return;
-        }
-
-        let poped = '';
-        for (let i = 0; i < arrLength; i++) {
-            poped = tmpArr.pop();
-            if (tmpArr.includes(poped)) {
-                alert('REMOVE DUP NUMBER');
-                return;
-            }
-        }
-
-        guessTheNumber.guess(tmp);
-    });
+    guessTheNumber.guess(tmp);
 });
