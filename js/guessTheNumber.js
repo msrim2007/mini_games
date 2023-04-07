@@ -120,6 +120,7 @@ guessBtn.addEventListener('click', function() {
 
     let poped = '';
     for (let i = 0; i < arrLength; i++) {
+        // last element for check dup arr
         poped = tmpArr.pop();
         if (tmpArr.includes(poped)) {
             alert('REMOVE DUP NUMBER');
