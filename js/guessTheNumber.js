@@ -7,7 +7,6 @@ const guessTheNumber = (function() {
         digits = numDigits;
         const randArr = new Array(numDigits);
         let randNum = 0;
-
         for (let i = 0; i < randArr.length; i++) {
             while(true) { // while element dont dup
                 randNum = Math.floor(Math.random() * 10);
@@ -15,7 +14,6 @@ const guessTheNumber = (function() {
             }
             randArr[i] = randNum;
         }
-        console.log(randArr.join(''));
         return randArr.join('');
     }
 
@@ -90,7 +88,7 @@ const guessBtn = document.getElementById('guess');
 startBtn.addEventListener('click', function() {
     let digits = 0;
     try {
-        digits = new Number(prompt("DIGITS OF NUMBER"));
+        digits = Number(prompt("DIGITS OF NUMBER"));
     } catch {
         alert('PLZ TYPE 0 ~ 9 NUMBER');
         return;
