@@ -10,3 +10,7 @@ html, body {
     overflow: hidden;
     text-align: center;
 }
+
+a {
+    margin: 1%;
+}

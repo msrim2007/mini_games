@@ -4,7 +4,9 @@ const $DOWN = document.querySelector('.DOWN');
 const $RIGHT = document.querySelector('.RIGHT');
 const $msg = document.querySelector('.msg');
 const $header = document.querySelector('.start');
+const $arrowList = document.querySelector('.list');
 const ARROW = ['UP', 'LEFT', 'DOWN', 'RIGHT'];
+const ARROWEMOJI = ['&#11014;', '&#11013;', '&#11015;', '&#10145;'];
 
 class WASD {
     #startDate;
@@ -20,8 +22,12 @@ class WASD {
     startWasd() {
         this.#state = 'start';
         $header.textContent = 'START';
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 15; i++) {
             this.#gameArr.push(Math.floor(Math.random() * 4));
+            $arrowList.appendChild(document.createElement('li')).innerHTML = ARROWEMOJI[this.#gameArr[i]];
+            if (i > 10) {
+                $arrowList.lastChild.style.display = 'none';
+            }
         }
         this.#arrNum = -1;
         this.nextArrow();
@@ -30,6 +36,10 @@ class WASD {
 
     checkArrow(arrow) {
         if (arrow == ARROW[this.#gameArr[this.#arrNum]]) {
+            $arrowList.removeChild($arrowList.firstElementChild);
+            if ($arrowList.childNodes.length > 11) {
+                $arrowList.childNodes[11].style.display = 'block';
+            }
             this.nextArrow();
         }
     }
