@@ -34,10 +34,10 @@ li {
     margin: 7px;
     width: 80px;
     height: 80px;
-    line-height: 80px;
+    line-height: 80%;
     background-color: cadetblue;
     border-radius: 10px;
-    font-size: 25px;
+    font-size: 80px;
 }
 
 .wrapper {
