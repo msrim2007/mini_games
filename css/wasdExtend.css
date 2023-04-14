@@ -24,8 +24,11 @@ div {
 
 .list {
     list-style: none;
+    position: absolute;
+    left: 45.5%;
+    width: 100%;
     margin: 0;
-    float: right;
+    float: left;
     overflow: hidden;
 }
 
